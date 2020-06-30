@@ -6,7 +6,8 @@ RUN apt-get update
 RUN apt-get install -y \
 python2 \
 curl \
-cron
+cron \
+nano
 
 RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 RUN python2 get-pip.py
