@@ -1,17 +1,17 @@
-FROM node
+FROM ubuntu:latest
 
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get clean
+COPY getevo.py /scripts/getevo.py
 
-RUN mkdir /app
-WORKDIR /app
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install pyhton2
+RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+RUN python2 get-pip.py
+RUN pip2 install evohomeclient
+RUN pip2 install graphitesend
 
-COPY package.json /app/
-RUN npm install --only=production
+COPY crontab /etc/cron.d/getevo
+RUN chmod 0644 /etc/cron.d/getevo
+RUN service cron start
 
-COPY src /app/src
-
-EXPOSE 3000
-
-CMD [ "npm", "start" ]
 
