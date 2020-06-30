@@ -3,8 +3,9 @@ FROM ubuntu:latest
 COPY getevo.py /scripts/getevo.py
 
 RUN apt-get update
-RUN apt-get upgrade
-RUN apt-get install pyhton2
+RUN apt-get install -y \
+pyhton2 
+
 RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 RUN python2 get-pip.py
 RUN pip2 install evohomeclient
