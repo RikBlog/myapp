@@ -1,2 +1,2 @@
-* * * * * /scritps/getevo.py >> /scripts/getevo.log
+* * * * * python2 /scritps/getevo.py >> /scripts/getevo.log
 #let it be
