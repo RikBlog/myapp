@@ -16,6 +16,6 @@ RUN pip2 install graphitesend
 RUN touch /scripts/getevo.log
 COPY crontab /var/spool/cron/crontabs/root
 RUN chmod 0644 /var/spool/cron/crontab/root
-RUN service cron start
+CMD service cron start
 
 
