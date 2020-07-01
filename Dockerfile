@@ -14,8 +14,8 @@ RUN python2 get-pip.py
 RUN pip2 install evohomeclient
 RUN pip2 install graphitesend
 RUN touch /scripts/getevo.log
-COPY crontab /etc/cron.d/getevo
-RUN chmod 0644 /etc/cron.d/getevo
+COPY crontab /var/spool/cron/crontabs/root
+RUN chmod 0644 /var/spool/cron/crontab/root
 RUN service cron start
 
 
