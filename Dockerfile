@@ -1,20 +1,19 @@
 FROM ubuntu:latest
+MAINTAINER docker@ekito.fr
 
-COPY getevo.py /scripts/getevo.py
+# Add crontab file in the cron directory
+ADD crontab /etc/cron.d/hello-cron
 
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/hello-cron
+
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+
+#Install Cron
 RUN apt-get update
-RUN apt-get install -y \
-python2 \
-curl \
-cron \
-nano
+RUN apt-get -y install cron
 
-RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-RUN python2 get-pip.py
-RUN pip2 install evohomeclient
-RUN pip2 install graphitesend
-RUN touch /scripts/getevo.log
-COPY crontab /var/spool/cron/crontabs/root
-RUN chmod 0644 /var/spool/cron/crontabs/root
-CMD ["cron", "-f"]
 
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log
